@@ -21,18 +21,22 @@ typedef struct {
   point_t at;
 
   enum {
-    MOUSE_PRESS,
-    MOUSE_RELEASE,
-    MOUSE_MOVE = 35,
+    MOUSE_PRESS   = 0,
+    MOUSE_RELEASE = 1,
+    MOUSE_MOVE    = 35,
   } type;
 
   enum {
-    BUTTON_LEFT = 0,
-    BUTTON_MIDDLE,
-    BUTTON_RIGHT,
+    BUTTON_LEFT   = 0,
+    BUTTON_MIDDLE = 1,
+    BUTTON_RIGHT  = 2,
   } button;
 } mouse_event_t;
 
+/**
+  \brief Returns true whether current terminal is urxvt.
+  \see `set_mouse_mode`
+  */
 static bool is_urxvt(void);
 
 /**
@@ -41,6 +45,10 @@ static bool is_urxvt(void);
   */
 void set_mouse_mode(mouse_mode_e mode);
 
+/**
+  \brief Parse control sequence as a mouse state report.
+  \return Parsed event.
+  */
 mouse_event_t parse_mouse(char *data);
 
 #endif /* __DZ_TERM_MOUSE_H__ */

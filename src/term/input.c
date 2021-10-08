@@ -2,6 +2,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -24,10 +25,18 @@ parse_input()
   while ((data[index++] = select_char()))
     ;
   len = strlen(data);
-  if (data[len - 1] == 'm' || data[len - 1] == 'M') {
-    return (input_event_t){.mouse = parse_mouse(data)};
-  } else {
-    return (input_event_t){.kb = parse_key(data)};
+  if (len > 0) {
+    if (data[len - 1] == 'm' || data[len - 1] == 'M') {
+      return (input_event_t){
+          .mouse = parse_mouse(data),
+          .type  = EVENT_TYPE_MOUSE,
+      };
+    } else {
+      return (input_event_t){
+          .kb   = parse_key(data),
+          .type = EVENT_TYPE_KEYBORAD,
+      };
+    }
   }
 #undef BUFSIZE
 }

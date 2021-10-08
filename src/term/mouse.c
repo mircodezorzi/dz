@@ -61,11 +61,14 @@ set_mouse_mode(mouse_mode_e mode)
 mouse_event_t
 parse_mouse(char *data)
 {
-  point_t at;
-  int     button;
-  char    c;
+  point_t  at;
+  unsigned button;
+  char     c;
 
-  sscanf(data, "%d;%d;%d%c", &button, &at.x, &at.y, &c);
+  sscanf(data + 3, "%d;%d;%d%c", &button, &at.x, &at.y, &c);
+
+  at.x -= 1;
+  at.y -= 1;
 
   return (mouse_event_t){
       .at     = at,
