@@ -21,9 +21,9 @@ is_urxvt()
   if (snprintf(path, BUFSIZE, "%s", getenv(envvar)) >= BUFSIZE) {
     return strstr(path, "rxvt-unicode");
   }
-#undef BUFSIZE
 
   return false;
+#undef BUFSIZE
 }
 
 void
@@ -33,27 +33,27 @@ set_mouse_mode(mouse_mode_e mode)
 
   switch (mode) {
   case MOUSE_MODE_OFF:
-    PRINT(L_("\033[?1000;1002;1003;"));
-    PRINT(ext);
-    PRINT(L_("l"));
+    PUTS(L_("\033[?1000;1002;1003;"));
+    PUTS(ext);
+    PUTS(L_("l"));
     break;
   case MOUSE_MODE_BASIC:
-    PRINT(L_("\033[?1000;1002;1003;"));
-    PRINT(L_("\033[?1000;"));
-    PRINT(ext);
-    PRINT(L_("h"));
+    PUTS(L_("\033[?1000;1002;1003;"));
+    PUTS(L_("\033[?1000;"));
+    PUTS(ext);
+    PUTS(L_("h"));
     break;
   case MOUSE_MODE_DRAG:
-    PRINT(L_("\033[?1000;1003l"));
-    PRINT(L_("\033[?1002;"));
-    PRINT(ext);
-    PRINT(L_("h"));
+    PUTS(L_("\033[?1000;1003l"));
+    PUTS(L_("\033[?1002;"));
+    PUTS(ext);
+    PUTS(L_("h"));
     break;
   case MOUSE_MODE_MOVE:
-    PRINT(L_("\033[?1000;1002l"));
-    PRINT(L_("\033[?1003;"));
-    PRINT(ext);
-    PRINT(L_("h"));
+    PUTS(L_("\033[?1000;1002l"));
+    PUTS(L_("\033[?1003;"));
+    PUTS(ext);
+    PUTS(L_("h"));
     break;
   }
 }

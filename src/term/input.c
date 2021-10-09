@@ -19,9 +19,9 @@ input_event_t
 parse_input()
 {
 #define BUFSIZE 256
-  char data[BUFSIZE];
-  int  index = 0;
-  int  len   = 0;
+  char data[BUFSIZE] = {0};
+  int  index         = 0;
+  int  len           = 0;
   while ((data[index++] = select_char()))
     ;
   len = strlen(data);
@@ -38,5 +38,8 @@ parse_input()
       };
     }
   }
+  return (input_event_t){
+      .type = EVENT_TYPE_NONE,
+  };
 #undef BUFSIZE
 }

@@ -10,6 +10,7 @@ typedef struct {
   enum {
     EVENT_TYPE_KEYBORAD,
     EVENT_TYPE_MOUSE,
+    EVENT_TYPE_NONE,
   } type;
 } input_event_t;
 
