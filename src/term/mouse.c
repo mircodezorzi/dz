@@ -7,8 +7,12 @@
 #include <string.h>
 #include <wchar.h>
 
-bool
-is_urxvt()
+/**
+  \brief Returns true whether current terminal is urxvt.
+  \see `set_mouse_mode`.
+  */
+static bool
+is_urxvt(void)
 {
 #define BUFSIZE 256
   char  path[BUFSIZE];

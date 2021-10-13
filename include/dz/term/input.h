@@ -15,10 +15,10 @@ typedef struct {
 } input_event_t;
 
 /**
-  \brief Non blocking read.
+  \brief Parse keyboard and mouse input.
+  \see `set_mouse_mode`.
+  \return Struct representing mouse event. `type` member must not be EVENT_TYPE_NONE.
   */
-static char select_char(void);
-
 input_event_t parse_input(void);
 
 #endif /* __DZ_TERM_INPUT_H__ */

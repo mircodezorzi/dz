@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <wchar.h>
 
-char
+static char
 select_char()
 {
   char buff;

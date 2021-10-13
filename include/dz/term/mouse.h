@@ -5,11 +5,15 @@
 #include <dz/point.h>
 
 typedef enum {
+  /* Disables mouse reporting. */
   MOUSE_MODE_OFF,
+
   /* Report mouse state each click. */
   MOUSE_MODE_BASIC,
+
   /* Report mouse state each time it is dragged. */
   MOUSE_MODE_DRAG,
+
   /* Report mouse state each time it moves. */
   MOUSE_MODE_MOVE,
 } mouse_mode_e;
@@ -34,20 +38,15 @@ typedef struct {
 } mouse_event_t;
 
 /**
-  \brief Returns true whether current terminal is urxvt.
-  \see `set_mouse_mode`
-  */
-static bool is_urxvt(void);
-
-/**
   \brief Set appropriate mouse reporting mode.
-  \reference https://github.com/a-n-t-h-o-n-y/Escape/blob/master/src/terminal.cpp
+  \reference https://github.com/a-n-t-h-o-n-y/Escape/blob/master/src/terminal.cpp.
   */
 void set_mouse_mode(mouse_mode_e mode);
 
 /**
   \brief Parse control sequence as a mouse state report.
   \return Parsed event.
+  \todo Implement modifier support.
   */
 mouse_event_t parse_mouse(char *data);
 

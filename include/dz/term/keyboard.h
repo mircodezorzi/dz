@@ -23,6 +23,9 @@ typedef struct {
   } modifier;
 } kb_event_t;
 
+/**
+  \brief Parse keypress.
+  */
 kb_event_t parse_key(char *data);
 
 #endif /* __DZ_TERM_KEYBOARD_H__ */
