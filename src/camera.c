@@ -2,7 +2,6 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-/* \todo Calculate aspect ration dynamically */
 camera_t *
 camera_new()
 {
