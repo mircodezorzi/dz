@@ -1,6 +1,5 @@
 #include <dz/term.h>
-
-#include <dz/common.h>
+#include <dz/utf8.h>
 
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -10,12 +9,12 @@
 struct termios term_settings;
 
 void
-init_term()
+init_term(void)
 {
   struct termios new_settings;
 
-  PUTS(ANSI_CLEAR_SCREEN);
-  PUTS(ANSI_HIDE_CURSOR);
+  u8_printf(ANSI_CLEAR_SCREEN);
+  u8_printf(ANSI_HIDE_CURSOR);
 
   tcgetattr(0, &term_settings);
 
@@ -30,9 +29,18 @@ init_term()
 }
 
 void
-end_term()
+end_term(void)
 {
-  PUTS(ANSI_CLEAR_SCREEN);
-  PUTS(ANSI_SHOW_CURSOR);
+  u8_printf(ANSI_CLEAR_SCREEN);
+  u8_printf(ANSI_SHOW_CURSOR);
   tcsetattr(0, TCSANOW, &term_settings);
+}
+
+void
+termsize(int *w, int *h)
+{
+  struct winsize win;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
+  *w = win.ws_col;
+  *h = win.ws_row;
 }
