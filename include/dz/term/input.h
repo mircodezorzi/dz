@@ -5,12 +5,15 @@
 #include <dz/term/mouse.h>
 
 typedef struct {
-  kb_event_t    kb;
-  mouse_event_t mouse;
+  union {
+    kb_event_t    kb;
+    mouse_event_t mouse;
+  } e;
+
   enum {
-    EVENT_TYPE_KEYBORAD,
-    EVENT_TYPE_MOUSE,
     EVENT_TYPE_NONE,
+    EVENT_TYPE_KEYBOARD,
+    EVENT_TYPE_MOUSE,
   } type;
 } input_event_t;
 

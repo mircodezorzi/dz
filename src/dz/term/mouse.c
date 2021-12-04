@@ -1,11 +1,14 @@
 #include <dz/term/mouse.h>
 
-#include <dz/common.h>
+#include <dz/utf8.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
+
+/* forward declaration for ANSI support */
+int snprintf(char *buffer, size_t bufsz, const char *format, ...);
 
 /**
   \brief Returns true whether current terminal is urxvt.
@@ -23,7 +26,7 @@ is_urxvt(void)
   }
 
   if (snprintf(path, BUFSIZE, "%s", getenv(envvar)) >= BUFSIZE) {
-    return strstr(path, "rxvt-unicode");
+    return !!strstr(path, "rxvt-unicode");
   }
 
   return false;
@@ -33,31 +36,31 @@ is_urxvt(void)
 void
 set_mouse_mode(mouse_mode_e mode)
 {
-  const wchar_t *ext = is_urxvt() ? L_("1015") : L_("1006");
+  char *ext = is_urxvt() ? "1015" : "1006";
 
   switch (mode) {
   case MOUSE_MODE_OFF:
-    PUTS(L_("\033[?1000;1002;1003;"));
-    PUTS(ext);
-    PUTS(L_("l"));
+    u8_printf("\033[?1000;1002;1003;");
+    u8_printf(ext);
+    u8_printf("l");
     break;
   case MOUSE_MODE_BASIC:
-    PUTS(L_("\033[?1000;1002;1003;"));
-    PUTS(L_("\033[?1000;"));
-    PUTS(ext);
-    PUTS(L_("h"));
+    u8_printf("\033[?1000;1002;1003;");
+    u8_printf("\033[?1000;");
+    u8_printf(ext);
+    u8_printf("h");
     break;
   case MOUSE_MODE_DRAG:
-    PUTS(L_("\033[?1000;1003l"));
-    PUTS(L_("\033[?1002;"));
-    PUTS(ext);
-    PUTS(L_("h"));
+    u8_printf("\033[?1000;1003l");
+    u8_printf("\033[?1002;");
+    u8_printf(ext);
+    u8_printf("h");
     break;
   case MOUSE_MODE_MOVE:
-    PUTS(L_("\033[?1000;1002l"));
-    PUTS(L_("\033[?1003;"));
-    PUTS(ext);
-    PUTS(L_("h"));
+    u8_printf("\033[?1000;1002l");
+    u8_printf("\033[?1003;");
+    u8_printf(ext);
+    u8_printf("h");
     break;
   }
 }
@@ -68,8 +71,13 @@ parse_mouse(char *data)
   point_t  at;
   unsigned button;
   char     c;
+  int      r;
 
-  sscanf(data + 3, "%d;%d;%d%c", &button, &at.x, &at.y, &c);
+  r = sscanf(data + 3, "%d;%d;%d%c", &button, &at.x, &at.y, &c);
+
+  if (r != 4) {
+    return (mouse_event_t){.button = BUTTON_NONE};
+  }
 
   at.x -= 1;
   at.y -= 1;

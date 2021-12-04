@@ -31,6 +31,7 @@ typedef struct {
   } type;
 
   enum {
+    BUTTON_NONE   = -1,
     BUTTON_LEFT   = 0,
     BUTTON_MIDDLE = 1,
     BUTTON_RIGHT  = 2,
