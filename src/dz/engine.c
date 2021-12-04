@@ -69,12 +69,12 @@ engine_loop(engine_t *e)
 
     screen_update(e->screen);
 
-    if (ev.type == EVENT_TYPE_KEYBORAD) {
-      if (ev.kb.key != KEY_NONE) {
-        (e->hook_kb)(e, ev.kb);
+    if (ev.type == EVENT_TYPE_KEYBOARD) {
+      if (ev.e.kb.key != KEY_NONE) {
+        (e->hook_kb)(e, ev.e.kb);
       }
     } else if (ev.type == EVENT_TYPE_MOUSE) {
-      (e->hook_mouse)(e, ev.mouse);
+      (e->hook_mouse)(e, ev.e.mouse);
     }
 
     if (e->run && e->hook_loop) {
@@ -88,7 +88,7 @@ engine_loop(engine_t *e)
 
     screen_repaint(e->screen);
 
-    usleep(100000000 / dt);
+    usleep(10 / dt);
   }
 
   set_mouse_mode(MOUSE_MODE_OFF);
