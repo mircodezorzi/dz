@@ -1,14 +1,7 @@
 #ifndef __DZ_CAMERA_H__
 #define __DZ_CAMERA_H__
 
-#include <cglm/cglm.h>
-
-#define vec3_assign(Vec, X, Y, Z)                                                        \
-  do {                                                                                   \
-    Vec[0] = X;                                                                          \
-    Vec[1] = Y;                                                                          \
-    Vec[2] = Z;                                                                          \
-  } while (0);
+#include <dz/acglm.h>
 
 typedef struct {
   vec3 position;
@@ -20,6 +13,7 @@ typedef struct {
 } camera_t;
 
 camera_t *camera_new(void);
+void      camera_free(camera_t *c);
 void      camera_update(camera_t *c);
 void      camera_map(camera_t *c, vec3 v, vec4 dest);
 

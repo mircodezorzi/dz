@@ -1,7 +1,7 @@
 ﻿---
-AlignConsecutiveMacros: 'true'
 AlignConsecutiveAssignments: 'true'
 AlignConsecutiveDeclarations: 'true'
+AlignConsecutiveMacros: 'true'
 AllowShortBlocksOnASingleLine: 'false'
 AllowShortCaseLabelsOnASingleLine: 'true'
 AllowShortFunctionsOnASingleLine: None
@@ -9,8 +9,11 @@ AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: None
 AllowShortLoopsOnASingleLine: 'false'
 AlwaysBreakAfterDefinitionReturnType: All
+BinPackArguments: 'false'
+BinPackParameters: 'false'
+BreakBeforeBinaryOperators: 'true'
 BreakBeforeBraces: Linux
 BreakBeforeTernaryOperators: 'true'
-ColumnLimit: 100
+ColumnLimit: 120
 
 ...
