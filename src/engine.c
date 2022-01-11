@@ -88,7 +88,7 @@ engine_loop(engine_t *e)
 
     screen_repaint(e->screen);
 
-    usleep(10 / dt);
+    usleep(100 / dt);
   }
 
   set_mouse_mode(MOUSE_MODE_OFF);

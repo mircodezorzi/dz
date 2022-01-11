@@ -58,6 +58,24 @@ typedef struct {
   tileset_e tileset;
 } rect_t;
 
+#define RECT(X, Y, W, H)                                                                                               \
+  ((rect_t){                                                                                                           \
+      .x = X,                                                                                                          \
+      .y = Y,                                                                                                          \
+      .w = W,                                                                                                          \
+      .h = H,                                                                                                          \
+  })
+
+/**
+  \brief Shrink rectangle by 1 pixel.
+  */
+#define SHRINK(Box) (RECT(Box.x + 1, Box.y + 1, Box.w - 1, Box.h - 1))
+
+/**
+  \brief Shrink rectangle by \p Num pixels.
+  */
+#define SHRINKN(Box, Num) (RECT(Box.x + Num, Box.y + Num, Box.w - Num, Box.h - Num))
+
 /**
   \brief Rectangle with floating point coordinates.
   \see screen_draw_frect

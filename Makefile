@@ -14,7 +14,7 @@ ifeq ($(DEBUG), 1)
 	export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1:detect_invalid_pointer_pairs=2
 	PREFIX := debug
 else
-	CFLAGS += -DNDEBUG -O2 -D_FORTIFY_SOURCE=2
+	CFLAGS += -DNDEBUG -O2
 	PREFIX := release
 endif
 
